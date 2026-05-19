@@ -1,0 +1,13 @@
+R
+library(lmtest)
+library(sandwich)
+#The Actual regression model. I had to cut and paste this symbol ~ because I could not find it on the keyboard I am using.
+model1 <- lm(current_vote ~ media_mentions + spending + previous_vote, data = x)
+#These are the regression results
+summary(model1)
+#This is the diagnostic test
+bptest(model1)
+#This is where I look for robust standard errors
+coeftest(model1, vcov = vcovHC(model1, type = "HC1")) 
+#This is my very cool plot
+plot(model1, which = 1)
